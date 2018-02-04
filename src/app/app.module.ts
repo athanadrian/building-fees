@@ -15,7 +15,7 @@ import { HouseFeesComponent } from './house-fees/house-fees.component';
 import { AdminFeesComponent } from './admin/admin-fees/admin-fees.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ResidentsComponent } from './admin/residents/residents.component';
+import { AdminResidentsComponent } from './admin/admin-residents/admin-residents.component';
 import { AllHouseFeesComponent } from './all-house-fees/all-house-fees.component';
 
 import { AuthService } from './services/auth.service';
@@ -33,7 +33,7 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
     AdminFeesComponent,
     LoginComponent,
     ProfileComponent,
-    ResidentsComponent,
+    AdminResidentsComponent,
     AllHouseFeesComponent
   ],
   imports: [
@@ -51,7 +51,7 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
       { path: 'house-fees', component: AllHouseFeesComponent, canActivate: [AuthGuard] },
       { path: 'profiles/:id', component: ProfileComponent, canActivate: [AuthGuard] },
      
-      { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/profiles', component: AdminResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/admin-fees', component: AdminFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] }
     ])
   ],
