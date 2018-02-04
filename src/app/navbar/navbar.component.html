@@ -6,7 +6,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <ng-template #loggedInUser>
+      <ng-template #loggedOutUser>
         <li class="nav-item">
           <a class="nav-link" routerLink="/login">Είσοδος</a>
         </li>
@@ -14,14 +14,17 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/house-fees">Τρέχοντα Κοινόχρηστα</a>
       </li>
-      <li ngbDropdown *ngIf="auth.user$ | async as user else loggedInUser" class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.displayName}}</a>
+      <li ngbDropdown *ngIf="appUser; else loggedOutUser" class="nav-item dropdown">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" 
+        aria-expanded="false">{{appUser.name}}</a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
           <!-- <a class="dropdown-item" [routerLink]="['house-fees',house-fees.year, house-fees.month]">Τρέχοντα κοινόχρηστά</a> -->
           <a class="dropdown-item" routerLink="house-fees">Όλα τα κοινόχρηστά</a>
           <a class="dropdown-item" routerLink="/my/profiles">Αλλαγή Στοιχείων</a>
-          <a class="dropdown-item" routerLink="/admin/admin-fees">Διαχείριση κοινοχρήστων</a>
-          <a class="dropdown-item" routerLink="/admin/profiles">Διαχείριση κατοικιών</a>
+          <ng-container *ngIf="appUser.isManager">
+            <a class="dropdown-item" routerLink="/admin/admin-fees">Διαχείριση κοινοχρήστων</a>
+            <a class="dropdown-item" routerLink="/admin/profiles">Διαχείριση κατοικιών</a>
+          </ng-container>
           <a class="dropdown-item" (click)="logout()">Έξοδος</a>
         </div>
       </li>

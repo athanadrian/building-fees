@@ -21,6 +21,7 @@ import { AllHouseFeesComponent } from './all-house-fees/all-house-fees.component
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
 
 
 @NgModule({
@@ -50,13 +51,14 @@ import { UserService } from './services/user.service';
       { path: 'house-fees', component: AllHouseFeesComponent, canActivate: [AuthGuard] },
       { path: 'profiles/:id', component: ProfileComponent, canActivate: [AuthGuard] },
      
-      { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard] },
-      { path: 'admin/admin-fees', component: AdminFeesComponent, canActivate: [AuthGuard] }
+      { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/admin-fees', component: AdminFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] }
     ])
   ],
   providers: [
     AuthService,
     AuthGuard,
+    AdminAuthGuard,
     UserService
   ],
   bootstrap: [AppComponent]
