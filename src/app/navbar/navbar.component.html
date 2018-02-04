@@ -6,18 +6,23 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
+      <ng-template #loggedInUser>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Είσοδος</a>
+        </li>
+      </ng-template>
       <li class="nav-item">
-        <a class="nav-link" routerLink="house-fees">Κοινόχρηστα</a>
+        <a class="nav-link" routerLink="/house-fees">Τρέχοντα Κοινόχρηστα</a>
       </li>
-      <li ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">Όνομα</a>
+      <li ngbDropdown *ngIf="auth.user$ | async as user else loggedInUser" class="nav-item dropdown">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.displayName}}</a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" routerLink="/my/fees">Τα κοινόχρηστά μου</a>
+          <!-- <a class="dropdown-item" [routerLink]="['house-fees',house-fees.year, house-fees.month]">Τρέχοντα κοινόχρηστά</a> -->
+          <a class="dropdown-item" routerLink="house-fees">Όλα τα κοινόχρηστά</a>
           <a class="dropdown-item" routerLink="/my/profiles">Αλλαγή Στοιχείων</a>
           <a class="dropdown-item" routerLink="/admin/admin-fees">Διαχείριση κοινοχρήστων</a>
           <a class="dropdown-item" routerLink="/admin/profiles">Διαχείριση κατοικιών</a>
-          <a class="dropdown-item">Έξοδος</a>
+          <a class="dropdown-item" (click)="logout()">Έξοδος</a>
         </div>
       </li>
     </ul>
