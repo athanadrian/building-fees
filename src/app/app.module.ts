@@ -59,8 +59,8 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
       { path: 'profiles/:id', component: ProfileComponent, canActivate: [AuthGuard] },
      
       { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/residences', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/residences/new', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/residences', component: ResidencesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/residences/new', component: ResidencesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/building-fees', component: BuildingFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/building-fees/new', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] }
     ])
