@@ -1,0 +1,35 @@
+<form>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="year">Year</label>
+          <select class="custom-select d-block w-100" id="year" required>
+            <option value="">Year...</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+          </select>
+          <div class="invalid-feedback">
+            Please select a valid country.
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="month">Month</label>
+          <select class="custom-select d-block w-100" id="month" required>
+            <option value="">Month...</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+          <div class="invalid-feedback">
+            Please provide a valid state.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="zip">Zip</label>
+          <input type="text" class="form-control" id="zip" placeholder="" required>
+          <div class="invalid-feedback">
+            Zip code required.
+          </div>
+        </div>
+      </div>
+</form>

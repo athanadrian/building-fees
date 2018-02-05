@@ -12,11 +12,15 @@ import { environment } from './../environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { HouseFeesComponent } from './house-fees/house-fees.component';
-import { AdminFeesComponent } from './admin/admin-fees/admin-fees.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AdminResidentsComponent } from './admin/admin-residents/admin-residents.component';
 import { AllHouseFeesComponent } from './all-house-fees/all-house-fees.component';
+
+import { ResidentsComponent } from './admin/residents/residents.component';
+import { ResidencesComponent } from './admin/residences/residences.component';
+import { ResidencesFormComponent } from './admin/residences-form/residences-form.component';
+import { BuildingFeesComponent } from './admin/building-fees/building-fees.component';
+import { BuildingFeesFormComponent } from './admin/building-fees-form/building-fees-form.component';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
@@ -30,11 +34,14 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
     NavbarComponent,
     HomeComponent,
     HouseFeesComponent,
-    AdminFeesComponent,
+    BuildingFeesComponent,
     LoginComponent,
     ProfileComponent,
-    AdminResidentsComponent,
-    AllHouseFeesComponent
+    ResidentsComponent,
+    AllHouseFeesComponent,
+    BuildingFeesFormComponent,
+    ResidencesComponent,
+    ResidencesFormComponent
   ],
   imports: [
     BrowserModule,
@@ -51,8 +58,11 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
       { path: 'house-fees', component: AllHouseFeesComponent, canActivate: [AuthGuard] },
       { path: 'profiles/:id', component: ProfileComponent, canActivate: [AuthGuard] },
      
-      { path: 'admin/profiles', component: AdminResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/admin-fees', component: AdminFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] }
+      { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/residences', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/residences/new', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/building-fees', component: BuildingFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/building-fees/new', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] }
     ])
   ],
   providers: [
