@@ -1,0 +1,25 @@
+
+.error-required{
+    background-color:rgb(248, 82, 53) !important;
+}
+
+    /* ::-webkit-input-placeholder {
+        color: #FF0000;
+       }
+       :-moz-placeholder {
+        color: #FF0000;
+       }
+       ::-moz-placeholder {
+        color: #FF0000;
+       }
+       :-ms-input-placeholder {
+        color: #FF0000;
+        } */
+        .error-input{
+            color: red !important;
+            opacity: 1; /* Firefox */
+        }
+        ::placeholder.error-input { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: red;
+            opacity: 1; /* Firefox */
+        }

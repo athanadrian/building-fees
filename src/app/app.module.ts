@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomFormsModule } from 'ng2-validation'
 
 import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
@@ -26,6 +28,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { FeesService } from './services/fees.service';
 
 
 @NgModule({
@@ -45,6 +48,8 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -61,15 +66,17 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
       { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences', component: ResidencesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences/new', component: ResidencesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/building-fees', component: BuildingFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/building-fees/new', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] }
+      { path: 'admin/building-fees/new', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/building-fees/:id', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/building-fees', component: BuildingFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] }
     ])
   ],
   providers: [
     AuthService,
     AuthGuard,
     AdminAuthGuard,
-    UserService
+    UserService,
+    FeesService
   ],
   bootstrap: [AppComponent]
 })

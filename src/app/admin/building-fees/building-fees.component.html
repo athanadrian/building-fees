@@ -1,3 +1,26 @@
 <p>
-  admin-fees works!
+  <a class="btn btn-primary" routerLink="/admin/building-fees/new">Προσθήκη Κοινοχρήστων Μήνα</a>
 </p>
+<p>
+  <input type="text" class="form-control" #query (keyup)="filter(query.value)" placeholder="Αναζήτηση.....">
+</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Total</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fee of filteredFees">
+      <td>{{fee.year}}</td>
+      <td>{{fee.month}}</td>
+      <td>{{fee.total}}</td>
+      <td>
+        <a [routerLink]="['/admin/building-fees/', fee.$key]">Επεξεργασία</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,35 +1,209 @@
-<form>
-    <div class="row">
-        <div class="col-md-4 mb-3">
-          <label for="year">Year</label>
-          <select class="custom-select d-block w-100" id="year" required>
-            <option value="">Year...</option>
-            <option>2018</option>
-            <option>2019</option>
-            <option>2020</option>
-          </select>
-          <div class="invalid-feedback">
-            Please select a valid country.
-          </div>
+<div class="row">
+  <div class="col-md-6">
+    <form #feesForm="ngForm">
+      <div class="card">
+        <div class="card-header text-white bg-info">
+          Κοινόχρηστα
         </div>
-        <div class="col-md-4 mb-3">
-          <label for="month">Month</label>
-          <select class="custom-select d-block w-100" id="month" required>
-            <option value="">Month...</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-          <div class="invalid-feedback">
-            Please provide a valid state.
-          </div>
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="zip">Zip</label>
-          <input type="text" class="form-control" id="zip" placeholder="" required>
-          <div class="invalid-feedback">
-            Zip code required.
+        <div class="card-body">
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label [ngClass]="{'error-required':year.touched && year.invalid}" class="input-group-text text-white bg-info" for="year">ΕΤΟΣ</label>
+                </div>
+                <select class="custom-select" #year="ngModel" required [(ngModel)]="fee.year" name="year" id="year">
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                </select>
+              </div>
+              <div class="alert alert-danger" *ngIf="year.touched && year.invalid">
+                Το έτος είναι υποχρεωτικό πεδίο.
+              </div>
+            </div>
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label [ngClass]="{'error-required':month.touched && month.invalid}" class="input-group-text text-white bg-info" for="month">ΜΗΝΑΣ</label>
+                </div>
+                <select class="custom-select" #month="ngModel" [(ngModel)]="fee.month" name="month" id="month" id="month" required>
+                  <option selected>Επιλογή...</option>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                </select>
+              </div>
+              <div class="alert alert-danger" *ngIf="month.touched && month.invalid">
+                Ο μήνας είναι υποχρεωτικό πεδίο.
+              </div>
+            </div>
           </div>
         </div>
       </div>
-</form>
+      <div class="card">
+        <div class="card-header text-white bg-success">Πάγια</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':sewage.touched && sewage.invalid}" class="input-group-text text-white bg-success" id="basic-addon1">ΒΟΘΡΟΣ</span>
+              </div>
+              <input required [(ngModel)]="fee.sewage" #sewage="ngModel" sewage="ngModel" name="sewage" id="sewage" type="number" class="form-control"
+                [placeholder]="(sewage.touched && sewage.invalid) ? 'Required' : 'Sewage'" aria-label="sewage" aria-describedby="basic-addon1"
+                [min]="0">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="sewage.touched && sewage.invalid">
+                <div *ngIf="sewage.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="sewage.errors.min">Το ποσό πρέπει να είναι μεγαλύτερο από 0 €</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':pool.touched && pool.invalid}" class="input-group-text text-white bg-success" id="basic-addon4">ΠΙΣΙΝΑ</span>
+              </div>
+              <input type="number" required [(ngModel)]="fee.pool" #pool="ngModel" pool="ngModel" name="pool" id="pool" class="form-control"
+                [placeholder]="(pool.touched && pool.invalid) ? 'Required' : 'pool'" aria-label="pool" aria-describedby="basic-addon4"
+                [min]="0">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="pool.touched && pool.invalid">
+                <div *ngIf="pool.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="pool.errors.min">Το ποσό πρέπει να είναι μεγαλύτερο από 0 €</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':garden.touched && garden.invalid}" class="input-group-text text-white bg-success" id="basic-addon5">ΚΗΠΟΣ</span>
+              </div>
+              <input type="number" required [(ngModel)]="fee.garden" #garden="ngModel" garden="ngModel" name="garden" id="garden" class="form-control"
+                [placeholder]="(garden.touched && garden.invalid) ? 'Required' : 'garden'" aria-label="garden" aria-describedby="basic-addon5"
+                [min]="0">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="garden.touched && garden.invalid">
+                <div *ngIf="garden.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="garden.errors.min">Το ποσό πρέπει να είναι μεγαλύτερο από 0 €</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':water.touched && water.invalid}" class="input-group-text text-white bg-success" id="basic-addon3">ΕΥΔΑΠ</span>
+              </div>
+              <input type="number" required [(ngModel)]="fee.water" #water="ngModel" water="ngModel" name="water" id="water" class="form-control"
+                [placeholder]="(water.touched && water.invalid) ? 'Required' : 'water'" aria-label="water" aria-describedby="basic-addon3"
+                [min]="0">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="water.touched && water.invalid">
+                <div *ngIf="water.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="water.errors.min">Το ποσό πρέπει να είναι μεγαλύτερο από 0 €</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':electric.touched && electric.invalid}" class="input-group-text text-white bg-success"
+                  id="basic-addon2">ΔΕΗ</span>
+              </div>
+              <input type="number" required [(ngModel)]="fee.electric" #electric="ngModel" electric="ngModel" name="electric" id="electric"
+                class="form-control" [placeholder]="(electric.touched && electric.invalid) ? 'Required' : 'electric'" aria-label="electric"
+                aria-describedby="basic-addon2" [min]="0">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="electric.touched && electric.invalid">
+                <div *ngIf="electric.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="electric.errors.min">Το ποσό πρέπει να είναι μεγαλύτερο από 0 €</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="card">
+        <div class="card-header text-white bg-warning">Έξτρα</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="input-group mb-3 col-md-6">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Έξτρα 1</span>
+              </div>
+              <input type="number" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+            </div>
+            <div class="input-group mb-3 col-md-6">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="description">Περιγραφή</span>
+              </div>
+              <input type="text" class="form-control" placeholder="description" aria-label="description" aria-describedby="description">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 col-md-6">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Έξτρα 1</span>
+              </div>
+              <input type="number" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+            </div>
+            <div class="input-group mb-3 col-md-6">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="description">Περιγραφή</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Περιγραφή" aria-label="description" aria-describedby="description">
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div>
+        <button class="btn btn-primary" type="submit">Αποθήκευση</button>
+      </div>-->
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header text-white bg-primary">
+        Κοινόχρηστα {{fee.month}} / {{fee.year}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Ανάλυση Κοινοχρήστων</h5>
+        <p class="card-text">Βόθρος:
+          <span class="text-right font-weight-bold">{{fee.sewage }}</span>
+        </p>
+        <p class="card-text">Πισίνα:
+          <span class="text-right font-weight-bold">{{fee.pool}}</span>
+        </p>
+        <p class="card-text">Κήπος:
+          <span class="text-right font-weight-bold">{{fee.garden}}</span>
+        </p>
+        <p class="card-text">ΕΥΔΑΠ:
+          <span class="text-right font-weight-bold">{{fee.water}}</span>
+        </p>
+        <p class="card-text">ΔΕΗ:
+          <span class="text-right font-weight-bold">{{fee.electric}}</span>
+        </p>
+      </div>
+      <div class="card-footer text-white bg-secondary text-right">Total: {{sewage.value+pool.value+garden.value+water.value+electric.value}}</div>
+      <div>
+        <button class="btn btn-primary btn-lg" [disabled]="feesForm.invalid" (click)="save(feesForm.value)">Αποθήκευση</button>
+        <button type="button" class="btn btn-danger btn-lg" (click)="delete()">&nbsp;&nbsp;Διαγραφή&nbsp;</button>
+      </div>
+    </div>
+  </div>
+</div>
