@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/take';
 
 import { Fee } from '../../models/fee';
+import { LookupService } from '../../services/lookup.service';
 
 
 
@@ -14,14 +15,17 @@ import { Fee } from '../../models/fee';
 })
 export class BuildingFeesFormComponent implements OnInit {
 
+  years$;
   fee: Fee = new Fee();
   id: string;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private lookupService: LookupService,
     private feesService: FeesService) {
 
+    this.years$ = this.lookupService.getYears();
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) this.feesService.get(this.id).take(1).subscribe(fee => this.fee = fee);
   }

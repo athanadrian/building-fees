@@ -13,9 +13,7 @@
                   <label [ngClass]="{'error-required':year.touched && year.invalid}" class="input-group-text text-white bg-info" for="year">ΕΤΟΣ</label>
                 </div>
                 <select class="custom-select" #year="ngModel" required [(ngModel)]="fee.year" name="year" id="year">
-                  <option value="2018">2018</option>
-                  <option value="2019">2019</option>
-                  <option value="2020">2020</option>
+                  <option *ngFor="let year of years$ | async" [value]="year.$key">{{year.year}}</option>
                 </select>
               </div>
               <div class="alert alert-danger" *ngIf="year.touched && year.invalid">
@@ -41,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="card">
+      <div *ngIf="fee.year && fee.month" class="card">
         <div class="card-header text-white bg-success">Πάγια</div>
         <div class="card-body">
           <div class="row">
@@ -177,7 +175,7 @@
     </form>
   </div>
   <div class="col-md-6">
-    <div class="card" style="width: 18rem;">
+    <!--  <div *ngIf="fee.year && fee.month" class="card" style="width: 18rem;">
       <div class="card-header text-white bg-primary">
         Κοινόχρηστα {{fee.month}} / {{fee.year}}
       </div>
@@ -199,11 +197,12 @@
           <span class="text-right font-weight-bold">{{fee.electric}}</span>
         </p>
       </div>
-      <div class="card-footer text-white bg-secondary text-right">Total: {{sewage.value+pool.value+garden.value+water.value+electric.value}}</div>
-      <div>
-        <button class="btn btn-primary btn-lg" [disabled]="feesForm.invalid" (click)="save(feesForm.value)">Αποθήκευση</button>
-        <button type="button" class="btn btn-danger btn-lg" (click)="delete()">&nbsp;&nbsp;Διαγραφή&nbsp;</button>
-      </div>
+      <div class="card-footer text-white bg-secondary text-right">Total: {{fee.total}}</div>
+    </div> -->
+    <fee-card [fee]="fee" [show-actions]="false"></fee-card>
+    <div *ngIf="fee.year && fee.month">
+      <button class="btn btn-primary btn-lg" [disabled]="feesForm.invalid" (click)="save(feesForm.value)">Αποθήκευση</button>
+      <button type="button" class="btn btn-danger btn-lg" (click)="delete()">&nbsp;&nbsp;Διαγραφή&nbsp;</button>
     </div>
   </div>
 </div>

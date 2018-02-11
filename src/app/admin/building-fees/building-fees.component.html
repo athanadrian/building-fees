@@ -4,23 +4,22 @@
 <p>
   <input type="text" class="form-control" #query (keyup)="filter(query.value)" placeholder="Αναζήτηση.....">
 </p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Year</th>
-      <th>Month</th>
-      <th>Total</th>
-      <th colspan="2">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let fee of filteredFees">
-      <td>{{fee.year}}</td>
-      <td>{{fee.month}}</td>
-      <td>{{fee.total}}</td>
-      <td>
-        <a [routerLink]="['/admin/building-fees/', fee.$key]">Επεξεργασία</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+    <data-table-column [property]="'year'" [header]="'Year'" [sortable]="true" [resizable]="true"></data-table-column>
+  
+    <data-table-column [property]="'month'" [header]="'Month'" [sortable]="true" [resizable]="true"></data-table-column>
+  
+    <data-table-column [property]="'pool'" [header]="'Pool'" [sortable]="true" [resizable]="true">
+      <ng-template #dataTableCell let-item="item">
+        {{item.total | currency :'EUR': true}}
+      </ng-template>
+    </data-table-column>
+    <data-table-column [property]="'$key'">
+      <ng-template #dataTableHeader let-item="item">
+        <i>Actions</i>
+      </ng-template>
+      <ng-template #dataTableCell let-item="item">
+        <a [routerLink]="['/admin/building-fees/', item.$key]">Επεξεργασία</a>
+      </ng-template>
+    </data-table-column>
+  </data-table>

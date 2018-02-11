@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomFormsModule } from 'ng2-validation'
+import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 
 import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
@@ -29,7 +30,9 @@ import { AuthGuard } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { FeesService } from './services/fees.service';
-
+import { LookupService } from './services/lookup.service';
+import { FeeFilterComponent } from './house-fees/fee-filter/fee-filter.component';
+import { FeeCardComponent } from './fee-card/fee-card.component';
 
 @NgModule({
   declarations: [
@@ -44,23 +47,26 @@ import { FeesService } from './services/fees.service';
     AllHouseFeesComponent,
     BuildingFeesFormComponent,
     ResidencesComponent,
-    ResidencesFormComponent
+    ResidencesFormComponent,
+    FeeFilterComponent,
+    FeeCardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     CustomFormsModule,
+    DataTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: HouseFeesComponent },
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'house-fees/:year/:month', component: HouseFeesComponent },
 
-      { path: 'house-fees', component: AllHouseFeesComponent, canActivate: [AuthGuard] },
+      { path: 'house-fees', component: HouseFeesComponent, canActivate: [AuthGuard] },
       { path: 'profiles/:id', component: ProfileComponent, canActivate: [AuthGuard] },
      
       { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
@@ -76,7 +82,8 @@ import { FeesService } from './services/fees.service';
     AuthGuard,
     AdminAuthGuard,
     UserService,
-    FeesService
+    FeesService,
+    LookupService
   ],
   bootstrap: [AppComponent]
 })

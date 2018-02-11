@@ -1,0 +1,14 @@
+<div class="sticky-top">
+  <div class="list-group">
+    <a 
+    routerLink='/' 
+    class="list-group-item list-group-item-action" 
+    [class.active]="!year">Όλα τα Έτη</a>
+    <a 
+    *ngFor="let year of years$ | async" 
+    routerLink='/' 
+    [queryParams]='{year:year.$key}' 
+    class="list-group-item list-group-item-action"
+    [class.active]="(year === year.$key)">{{year.$key}}</a>
+  </div>
+</div>
