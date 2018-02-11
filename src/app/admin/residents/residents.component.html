@@ -1,3 +1,28 @@
 <p>
-  residents works!
-</p>
+    <a class="btn btn-primary" routerLink="/admin/residents/new">Προσθήκη Κατοίκου</a>
+  </p>
+  <p>
+    <input type="text" class="form-control" #query (keyup)="filter(query.value)" placeholder="Αναζήτηση.....">
+  </p>
+  <data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+    <!-- <data-table-column [property]="'code'" [header]="'Κωδικός'" [sortable]="true" [resizable]="true"></data-table-column>
+   -->
+    <data-table-column [property]="'firstname'" [header]="'Όνομα'" [sortable]="true" [resizable]="true">
+      <ng-template #dataTableCell let-item="item">
+        {{item.fistname }}
+      </ng-template>
+    </data-table-column>
+    <data-table-column [property]="'lastname'" [header]="'Επώνυμο'" [sortable]="true" [resizable]="true">
+        <ng-template #dataTableCell let-item="item">
+          {{item.lastname }}
+        </ng-template>
+      </data-table-column>
+    <data-table-column [property]="'$key'">
+      <ng-template #dataTableHeader let-item="item">
+        <i>Actions</i>
+      </ng-template>
+      <ng-template #dataTableCell let-item="item">
+        <a [routerLink]="['/admin/residents/', item.$key]">Επεξεργασία</a>
+      </ng-template>
+    </data-table-column>
+  </data-table>

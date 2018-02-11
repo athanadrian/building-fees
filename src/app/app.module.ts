@@ -12,22 +12,28 @@ import { DataTableModule } from 'angular-4-data-table-bootstrap-4';
 import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 
+import { LoginComponent } from './login/login.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { HouseFeesComponent } from './house-fees/house-fees.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
 import { AllHouseFeesComponent } from './all-house-fees/all-house-fees.component';
+import { ProfileComponent } from './profile/profile.component';
 
-import { ResidentsComponent } from './admin/residents/residents.component';
-import { ResidencesComponent } from './admin/residences/residences.component';
-import { ResidencesFormComponent } from './admin/residences-form/residences-form.component';
 import { BuildingFeesComponent } from './admin/building-fees/building-fees.component';
 import { BuildingFeesFormComponent } from './admin/building-fees-form/building-fees-form.component';
-import { ResidenceFilterComponent } from './admin/residences/residence-filter/residence-filter.component';
 import { FeeFilterComponent } from './house-fees/fee-filter/fee-filter.component';
 import { FeeCardComponent } from './fee-card/fee-card.component';
+
 import { ResidenceCardComponent } from './residence-card/residence-card.component';
+import { ResidenceFilterComponent } from './admin/residences/residence-filter/residence-filter.component';
+import { ResidencesComponent } from './admin/residences/residences.component';
+import { ResidencesFormComponent } from './admin/residences-form/residences-form.component';
+
+import { ResidentsComponent } from './admin/residents/residents.component';
+import { ResidentFilterComponent } from './admin/residents/resident-filter/resident-filter.component';
+import { ResidentCardComponent } from './resident-card/resident-card.component';
+import { ResidentsFormComponent } from './admin/residents-form/residents-form.component';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
@@ -36,6 +42,7 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { FeesService } from './services/fees.service';
 import { LookupService } from './services/lookup.service';
 import { ResidencesService } from './services/residences.service';
+import { ResidentsService } from './services/residents.service';
 
 
 
@@ -56,7 +63,10 @@ import { ResidencesService } from './services/residences.service';
     FeeFilterComponent,
     FeeCardComponent,
     ResidenceCardComponent,
-    ResidenceFilterComponent
+    ResidenceFilterComponent,
+    ResidentFilterComponent,
+    ResidentCardComponent,
+    ResidentsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +86,9 @@ import { ResidencesService } from './services/residences.service';
       { path: 'house-fees', component: HouseFeesComponent, canActivate: [AuthGuard] },
       { path: 'profiles/:id', component: ProfileComponent, canActivate: [AuthGuard] },
      
-      { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/residents', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/residents/new', component: ResidentsFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/residents/:id', component: ResidentsFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences', component: ResidencesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences/new', component: ResidencesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences/:id', component: ResidencesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
@@ -92,6 +104,7 @@ import { ResidencesService } from './services/residences.service';
     UserService,
     FeesService,
     ResidencesService,
+    ResidentsService,
     LookupService
   ],
   bootstrap: [AppComponent]
