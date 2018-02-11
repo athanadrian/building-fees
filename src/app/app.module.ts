@@ -24,6 +24,10 @@ import { ResidencesComponent } from './admin/residences/residences.component';
 import { ResidencesFormComponent } from './admin/residences-form/residences-form.component';
 import { BuildingFeesComponent } from './admin/building-fees/building-fees.component';
 import { BuildingFeesFormComponent } from './admin/building-fees-form/building-fees-form.component';
+import { ResidenceFilterComponent } from './admin/residences/residence-filter/residence-filter.component';
+import { FeeFilterComponent } from './house-fees/fee-filter/fee-filter.component';
+import { FeeCardComponent } from './fee-card/fee-card.component';
+import { ResidenceCardComponent } from './residence-card/residence-card.component';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
@@ -31,8 +35,9 @@ import { UserService } from './services/user.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { FeesService } from './services/fees.service';
 import { LookupService } from './services/lookup.service';
-import { FeeFilterComponent } from './house-fees/fee-filter/fee-filter.component';
-import { FeeCardComponent } from './fee-card/fee-card.component';
+import { ResidencesService } from './services/residences.service';
+
+
 
 @NgModule({
   declarations: [
@@ -49,7 +54,9 @@ import { FeeCardComponent } from './fee-card/fee-card.component';
     ResidencesComponent,
     ResidencesFormComponent,
     FeeFilterComponent,
-    FeeCardComponent
+    FeeCardComponent,
+    ResidenceCardComponent,
+    ResidenceFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +79,7 @@ import { FeeCardComponent } from './fee-card/fee-card.component';
       { path: 'admin/profiles', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences', component: ResidencesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences/new', component: ResidencesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/residences/:id', component: ResidencesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/building-fees/new', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/building-fees/:id', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/building-fees', component: BuildingFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] }
@@ -83,6 +91,7 @@ import { FeeCardComponent } from './fee-card/fee-card.component';
     AdminAuthGuard,
     UserService,
     FeesService,
+    ResidencesService,
     LookupService
   ],
   bootstrap: [AppComponent]

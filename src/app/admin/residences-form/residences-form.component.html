@@ -1,3 +1,121 @@
-<p>
-  residences-form works!
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <form #residenceForm="ngForm">
+      <div class="card">
+        <div class="card-header text-white bg-success">Ποσοστά</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':code.touched && code.invalid}" class="input-group-text text-white bg-success" id="basic-addon1">ΚΩΔΙΚΟΣ</span>
+              </div>
+              <input required [(ngModel)]="residence.code" #code="ngModel" code="ngModel" name="code" id="sewage" type="text" class="form-control"
+                [placeholder]="(code.touched && code.invalid) ? 'Required' : 'Code'" aria-label="sewage" aria-describedby="basic-addon1">
+              <div class="alert alert-danger" *ngIf="code.touched && code.invalid">
+                <div *ngIf="code.errors.required">Υποχρεωτικό πεδίο</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':sewage.touched && sewage.invalid}" class="input-group-text text-white bg-success" id="basic-addon1">ΒΟΘΡΟΣ</span>
+              </div>
+              <input required [(ngModel)]="residence.sewage" #sewage="ngModel" sewage="ngModel" name="sewage" id="sewage" type="number" class="form-control"
+                [placeholder]="(sewage.touched && sewage.invalid) ? 'Required' : 'Sewage'" aria-label="sewage" aria-describedby="basic-addon1"
+                [min]="0" [max]="100">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="sewage.touched && sewage.invalid">
+                <div *ngIf="sewage.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="electric.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
+                <div *ngIf="electric.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':pool.touched && pool.invalid}" class="input-group-text text-white bg-success" id="basic-addon4">ΠΙΣΙΝΑ</span>
+              </div>
+              <input type="number" required [(ngModel)]="residence.pool" #pool="ngModel" pool="ngModel" name="pool" id="pool" class="form-control"
+                [placeholder]="(pool.touched && pool.invalid) ? 'Required' : 'pool'" aria-label="pool" aria-describedby="basic-addon4"
+                [min]="0" [max]="100">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="pool.touched && pool.invalid">
+                <div *ngIf="pool.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="electric.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
+                <div *ngIf="electric.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':garden.touched && garden.invalid}" class="input-group-text text-white bg-success" id="basic-addon5">ΚΗΠΟΣ</span>
+              </div>
+              <input type="number" required [(ngModel)]="residence.garden" #garden="ngModel" garden="ngModel" name="garden" id="garden" class="form-control"
+                [placeholder]="(garden.touched && garden.invalid) ? 'Required' : 'garden'" aria-label="garden" aria-describedby="basic-addon5"
+                [min]="0" [max]="100">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="garden.touched && garden.invalid">
+                <div *ngIf="garden.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="electric.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
+                <div *ngIf="electric.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':water.touched && water.invalid}" class="input-group-text text-white bg-success" id="basic-addon3">ΕΥΔΑΠ</span>
+              </div>
+              <input type="number" required [(ngModel)]="residence.water" #water="ngModel" water="ngModel" name="water" id="water" class="form-control"
+                [placeholder]="(water.touched && water.invalid) ? 'Required' : 'water'" aria-label="water" aria-describedby="basic-addon3"
+                [min]="0" [max]="100">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="water.touched && water.invalid">
+                <div *ngIf="water.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="electric.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
+                <div *ngIf="electric.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':electric.touched && electric.invalid}" class="input-group-text text-white bg-success"
+                  id="basic-addon2">ΔΕΗ</span>
+              </div>
+              <input type="number" required [(ngModel)]="residence.electric" #electric="ngModel" electric="ngModel" name="electric" id="electric"
+                class="form-control" [placeholder]="(electric.touched && electric.invalid) ? 'Required' : 'electric'" aria-label="electric"
+                aria-describedby="basic-addon2" [min]="0" [max]="100">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="electric.touched && electric.invalid">
+                <div *ngIf="electric.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="electric.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
+                <div *ngIf="electric.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <residence-card [residence]="residence"></residence-card>
+    <div>
+      <button class="btn btn-primary btn-lg" [disabled]="residenceForm.invalid" (click)="save(residenceForm.value)">Αποθήκευση</button>
+      <button type="button" class="btn btn-danger btn-lg" (click)="delete()">&nbsp;&nbsp;Διαγραφή&nbsp;</button>
+    </div>
+  </div>
+</div>

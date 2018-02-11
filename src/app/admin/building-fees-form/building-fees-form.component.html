@@ -175,30 +175,6 @@
     </form>
   </div>
   <div class="col-md-6">
-    <!--  <div *ngIf="fee.year && fee.month" class="card" style="width: 18rem;">
-      <div class="card-header text-white bg-primary">
-        Κοινόχρηστα {{fee.month}} / {{fee.year}}
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Ανάλυση Κοινοχρήστων</h5>
-        <p class="card-text">Βόθρος:
-          <span class="text-right font-weight-bold">{{fee.sewage }}</span>
-        </p>
-        <p class="card-text">Πισίνα:
-          <span class="text-right font-weight-bold">{{fee.pool}}</span>
-        </p>
-        <p class="card-text">Κήπος:
-          <span class="text-right font-weight-bold">{{fee.garden}}</span>
-        </p>
-        <p class="card-text">ΕΥΔΑΠ:
-          <span class="text-right font-weight-bold">{{fee.water}}</span>
-        </p>
-        <p class="card-text">ΔΕΗ:
-          <span class="text-right font-weight-bold">{{fee.electric}}</span>
-        </p>
-      </div>
-      <div class="card-footer text-white bg-secondary text-right">Total: {{fee.total}}</div>
-    </div> -->
     <fee-card [fee]="fee" [show-actions]="false"></fee-card>
     <div *ngIf="fee.year && fee.month">
       <button class="btn btn-primary btn-lg" [disabled]="feesForm.invalid" (click)="save(feesForm.value)">Αποθήκευση</button>

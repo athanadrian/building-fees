@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FeesService } from '../../services/fees.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/take';
@@ -13,7 +13,7 @@ import { LookupService } from '../../services/lookup.service';
   templateUrl: './building-fees-form.component.html',
   styleUrls: ['./building-fees-form.component.css']
 })
-export class BuildingFeesFormComponent implements OnInit {
+export class BuildingFeesFormComponent {
 
   years$;
   fee: Fee = new Fee();
@@ -29,10 +29,6 @@ export class BuildingFeesFormComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) this.feesService.get(this.id).take(1).subscribe(fee => this.fee = fee);
   }
-
-  ngOnInit() {
-  }
-
 
   save(fee) {
     if (this.id) this.feesService.update(this.id, fee);
