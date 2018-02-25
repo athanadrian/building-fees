@@ -22,4 +22,15 @@
       <a [routerLink]="['/admin/building-fees/', item.$key]">Επεξεργασία</a>
     </ng-template>
   </data-table-column>
+  <data-table-column [property]="'$key'">
+    <ng-template #dataTableHeader let-item="item">
+      Έκδοση
+    </ng-template>
+    <ng-template #dataTableCell let-item="item">
+      <button class="btn btn-link" (click)="makeFeesReportsForResidences(item.$key)">
+        <span class="fa fa-check text-info" *ngIf="!item.hasReported"></span>
+        <span class="fa fa-check text-warning" *ngIf="item.hasReported"></span>
+      </button>
+    </ng-template>
+  </data-table-column>
 </data-table>

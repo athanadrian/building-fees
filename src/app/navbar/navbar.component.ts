@@ -13,7 +13,9 @@ export class NavbarComponent {
 
   constructor(
     private auth: AuthService) {
-    auth.AppUser$.subscribe(appUser => this.appUser = appUser);
+    auth.AppUser$.subscribe(appUser => {
+      this.appUser = appUser
+    });
   }
 
   logout() {

@@ -1,115 +1,108 @@
 <div class="row">
-    <div class="col-md-6">
-      <form #residentForm="ngForm">
-        <div class="card">
-          <div class="card-header text-white bg-success">Στοιχεία κατοίκου</div>
-          <div class="card-body">
-            <div class="row">
-              <div class="input-group mb-3 offset-md-1 col-md-10">
-                <div class="input-group-prepend">
-                  <span [ngClass]="{'error-required':firstname.touched && firstname.invalid}" class="input-group-text text-white bg-success" id="basic-addon1">ΟΝΟΜΑ</span>
-                </div>
-                <input required [(ngModel)]="resident.firstname" #firstname="ngModel" firstname="ngModel" name="firstname" id="lastname" type="text" class="form-control"
-                  [placeholder]="(firstname.touched && firstname.invalid) ? 'Required' : 'firstname'" aria-label="lastname" aria-describedby="basic-addon1">
-                <div class="alert alert-danger" *ngIf="firstname.touched && firstname.invalid">
-                  <div *ngIf="firstname.errors.required">Υποχρεωτικό πεδίο</div>
-                </div>
+  <div class="col-md-6">
+    <form #residentForm="ngForm">
+      <div class="card">
+        <div class="card-header text-white bg-success">Στοιχεία κατοίκου</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-white bg-success" id="basic-addon1">USERNAME</span>
               </div>
-            </div>
-            <div class="row">
-              <div class="input-group mb-3 offset-md-1 col-md-10">
-                <div class="input-group-prepend">
-                  <span [ngClass]="{'error-required':lastname.touched && lastname.invalid}" class="input-group-text text-white bg-success" id="basic-addon1">ΕΠΩΝΥΜΟ</span>
-                </div>
-                <input required [(ngModel)]="resident.lastname" #lastname="ngModel" lastname="ngModel" name="lastname" id="lastname" type="text" class="form-control"
-                  [placeholder]="(lastname.touched && lastname.invalid) ? 'Required' : 'lastname'" aria-label="lastname" aria-describedby="basic-addon1"
-                  >
-                <div class="input-group-append">
-                  <span class="input-group-text">€</span>
-                </div>
-                <div class="alert alert-danger" *ngIf="lastname.touched && lastname.invalid">
-                  <div *ngIf="lastname.errors.required">Υποχρεωτικό πεδίο</div>
-                  <div *ngIf="lastname.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
-                  <div *ngIf="lastname.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <!-- <div class="input-group mb-3 offset-md-1 col-md-10">
-                <div class="input-group-prepend">
-                  <span [ngClass]="{'error-required':email.touched && email.invalid}" class="input-group-text text-white bg-success" id="basic-addon4">EMAIL</span>
-                </div>
-                <input type="text" required [(ngModel)]="resident.email" #email="ngModel" email="ngModel" name="email" id="email" class="form-control"
-                  [placeholder]="(email.touched && email.invalid) ? 'Required' : 'email'" aria-label="email" aria-describedby="basic-addon4">
-                <div class="input-group-append">
-                  <span class="input-group-text">€</span>
-                </div>
-                <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
-                  <div *ngIf="email.errors.required">Υποχρεωτικό πεδίο</div>
-                </div>
-              </div> -->
-            </div>
-            <div class="row">
-              <div class="input-group mb-3 offset-md-1 col-md-10">
-                <div class="input-group-prepend">
-                  <span [ngClass]="{'error-required':phone.touched && phone.invalid}" class="input-group-text text-white bg-success" id="basic-addon5">ΤΗΛΕΦΩΝΟ</span>
-                </div>
-                <input type="text" required [(ngModel)]="resident.phone" #phone="ngModel" phone="ngModel" name="phone" id="phone" class="form-control"
-                  [placeholder]="(phone.touched && phone.invalid) ? 'Required' : 'phone'" aria-label="phone" aria-describedby="basic-addon5">
-                <div class="input-group-append">
-                  <span class="input-group-text">€</span>
-                </div>
-                <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">
-                  <div *ngIf="phone.errors.required">Υποχρεωτικό πεδίο</div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-group mb-3 offset-md-1 col-md-10">
-                <div class="input-group-prepend">
-                  <span [ngClass]="{'error-required':isOwner.touched && isOwner.invalid}" class="input-group-text text-white bg-success" id="basic-addon3">ΙΔΙΟΚΤΗΤΗΣ</span>
-                </div>
-                <input type="number" required [(ngModel)]="resident.isOwner" #isOwner="ngModel" isOwner="ngModel" name="isOwner" id="isOwner" class="form-control"
-                  [placeholder]="(isOwner.touched && isOwner.invalid) ? 'Required' : 'isOwner'" aria-label="isOwner" aria-describedby="basic-addon3"
-                  >
-                <div class="input-group-append">
-                  <span class="input-group-text">€</span>
-                </div>
-                <div class="alert alert-danger" *ngIf="isOwner.touched && isOwner.invalid">
-                  <div *ngIf="isOwner.errors.required">Υποχρεωτικό πεδίο</div>
-                  <div *ngIf="isOwner.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
-                  <div *ngIf="isOwner.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-group mb-3 offset-md-1 col-md-10">
-                <div class="input-group-prepend">
-                  <span [ngClass]="{'error-required':isActive.touched && isActive.invalid}" class="input-group-text text-white bg-success"
-                    id="basic-addon2">ΔΕΗ</span>
-                </div>
-                <input type="number" required [(ngModel)]="resident.isActive" #isActive="ngModel" isActive="ngModel" name="isActive" id="isActive"
-                  class="form-control" [placeholder]="(isActive.touched && isActive.invalid) ? 'Required' : 'isActive'" aria-label="isActive"
-                  aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <span class="input-group-text">€</span>
-                </div>
-                <div class="alert alert-danger" *ngIf="isActive.touched && isActive.invalid">
-                  <div *ngIf="isActive.errors.required">Υποχρεωτικό πεδίο</div>
-                  <div *ngIf="isActive.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
-                  <div *ngIf="isActive.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
-                </div>
-              </div>
+              <input readonly [(ngModel)]="resident.name" #name="ngModel" name="ngModel" name="name" id="name" type="text" class="form-control"
+                aria-label="name" aria-describedby="basic-addon1">
             </div>
           </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-white bg-success" id="basic-addon1">EMAIL</span>
+              </div>
+              <input readonly [(ngModel)]="resident.email" #email="ngModel" email="ngModel" name="email" id="email" type="text" class="form-control"
+                aria-label="email" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-white bg-success" id="basic-addon1">ΟΝΟΜΑ</span>
+              </div>
+              <input [(ngModel)]="resident.firstname" firstname="ngModel" name="firstname" id="firstname" type="text" class="form-control"
+                aria-label="lastname" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-white bg-success" id="basic-addon1">ΕΠΩΝΥΜΟ</span>
+              </div>
+              <input [(ngModel)]="resident.lastname" lastname="ngModel" name="lastname" id="lastname" type="text" class="form-control"
+                aria-label="lastname" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-white bg-success" id="basic-addon5">ΤΗΛΕΦΩΝΟ</span>
+              </div>
+              <input type="text" [(ngModel)]="resident.phone" name="phone" id="phone" class="form-control" aria-label="phone" aria-describedby="basic-addon5">
+            </div>
+          </div>
+          <div class="row" *ngIf="!appUser.isManager else managerArea">
+            <div class="input-group mb-3 offset-md-2 col-md-10 custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" [(ngModel)]="resident.isOwner" name="isOwner" id="isOwner">
+              <label class="custom-control-label" for="isOwner">Ιδιοκτήτης</label>
+            </div>
+          </div>
+          <ng-template #managerArea>
+            <div class="row">
+              <div class="input-group mb-3 offset-md-2 col-md-10 custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="resident.isManager" name="isManager" id="isManager">
+                <label class="custom-control-label" for="isManager">Διαχειριστής</label>
+              </div>
+            </div>
+            <div class="row">
+                <div class="input-group mb-3 offset-md-2 col-md-10 custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" [(ngModel)]="resident.isResident" name="isResident" id="isResident">
+                  <label class="custom-control-label" for="isResident">Διαμένει</label>
+                </div>
+              </div>
+            <div class="row">
+              <div class="input-group mb-3 offset-md-2 col-md-10 custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="resident.isPaying" name="isPaying" id="isPaying">
+                <label class="custom-control-label" for="isPaying">Πληρώνει</label>
+              </div>
+            </div>
+          </ng-template>
+          <!-- <div class="row">
+            <div class="input-group mb-3 offset-md-1 col-md-10">
+              <div class="input-group-prepend">
+                <span [ngClass]="{'error-required':isActive.touched && isActive.invalid}" class="input-group-text text-white bg-success"
+                  id="basic-addon2">ΔΕΗ</span>
+              </div>
+              <input type="number" required [(ngModel)]="resident.isActive" #isActive="ngModel" isActive="ngModel" name="isActive" id="isActive"
+                class="form-control" [placeholder]="(isActive.touched && isActive.invalid) ? 'Required' : 'isActive'" aria-label="isActive"
+                aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <span class="input-group-text">€</span>
+              </div>
+              <div class="alert alert-danger" *ngIf="isActive.touched && isActive.invalid">
+                <div *ngIf="isActive.errors.required">Υποχρεωτικό πεδίο</div>
+                <div *ngIf="isActive.errors.min">Το ποσοστό πρέπει να είναι μεγαλύτερο από 0%.</div>
+                <div *ngIf="isActive.errors.max">Το ποσοστό πρέπει να είναι μικρότερο από 100%.</div>
+              </div>
+            </div>
+          </div> -->
         </div>
-      </form>
-    </div>
-    <div class="col-md-6">
-      <resident-card [resident]="resident"></resident-card>
-      <div>
-        <button class="btn btn-primary btn-lg" [disabled]="residentForm.invalid" (click)="save(residentForm.value)">Αποθήκευση</button>
-        <button type="button" class="btn btn-danger btn-lg" (click)="delete()">&nbsp;&nbsp;Διαγραφή&nbsp;</button>
       </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <resident-card [resident]="resident"></resident-card>
+    <div>
+      <button class="btn btn-primary btn-lg" [disabled]="residentForm.invalid" (click)="save(residentForm.value)">Αποθήκευση</button>
+      <button type="button" class="btn btn-danger btn-lg" (click)="delete()">&nbsp;&nbsp;Διαγραφή&nbsp;</button>
+      <button type="button" class="btn btn-danger btn-lg" (click)="deleteUserHouseFees(resident.$key)">&nbsp;&nbsp;FeesDelete&nbsp;</button>
     </div>
   </div>
+</div>

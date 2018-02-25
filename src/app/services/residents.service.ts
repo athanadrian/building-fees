@@ -31,4 +31,8 @@ export class ResidentsService {
     return this.db.object('/residents/' + residentId).remove();
   }
 
+  delegateResidenceToResident( residenceId:string, residentId:string ){
+    return this.db.object('/residents/' + residentId).update({residenceId:residenceId});
+  }
+
 }

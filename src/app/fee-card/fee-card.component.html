@@ -20,5 +20,16 @@
       <span class="text-right font-weight-bold">{{fee.electric}}</span>
     </p>
   </div>
-  <div class="card-footer text-white bg-secondary text-right">Total: {{fee.total}}</div>
+  <div class="total text-right">
+    Total: {{fee.total}}
+  </div>
+  <!-- <div *ngIf="showReport" class="card-footer text-white bg-info text-right"> -->
+  <div class="card-footer text-white bg-link" *ngIf="!appUser">
+      <a class="btn btn-info btn-block text-right" routerLink="/login">Συνδεσου να δεις τα κοινόχρηστά....</a>
+  </div>
+  <div class="card-footer text-white bg-link" *ngIf="appUser">
+      <a class="btn btn-warning btn-block text-right" *ngIf="!fee.hasReported" href="#">Δεν έχουν εκδοθεί ακόμα....</a>
+      <!-- <button class="btn btn-warning btn-block text-right" (click)="addFeeToHouseFees(fee)" *ngIf="!fee.hasReported">Bγάλε μου τα κοινόχρηστά....</button> -->
+      <a class="btn btn-info btn-block text-right" *ngIf="fee.hasReported" [routerLink]="['/all-house-fees/', appUser.$key]">Δείξε μου τα κοινόχρηστά....</a>
+    </div>
 </div>

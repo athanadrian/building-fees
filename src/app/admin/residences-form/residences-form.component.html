@@ -11,6 +11,9 @@
               </div>
               <input required [(ngModel)]="residence.code" #code="ngModel" code="ngModel" name="code" id="sewage" type="text" class="form-control"
                 [placeholder]="(code.touched && code.invalid) ? 'Required' : 'Code'" aria-label="sewage" aria-describedby="basic-addon1">
+              <div class="input-group-append">
+                <span class="input-group-text"><span class="fa fa-home fa-lg"></span></span>
+              </div>
               <div class="alert alert-danger" *ngIf="code.touched && code.invalid">
                 <div *ngIf="code.errors.required">Υποχρεωτικό πεδίο</div>
               </div>
@@ -21,11 +24,11 @@
               <div class="input-group-prepend">
                 <span [ngClass]="{'error-required':sewage.touched && sewage.invalid}" class="input-group-text text-white bg-success" id="basic-addon1">ΒΟΘΡΟΣ</span>
               </div>
-              <input required [(ngModel)]="residence.sewage" #sewage="ngModel" sewage="ngModel" name="sewage" id="sewage" type="number" class="form-control"
-                [placeholder]="(sewage.touched && sewage.invalid) ? 'Required' : 'Sewage'" aria-label="sewage" aria-describedby="basic-addon1"
-                [min]="0" [max]="100">
+              <input required [(ngModel)]="residence.sewage" #sewage="ngModel" sewage="ngModel" name="sewage" id="sewage" type="number"
+                class="form-control" [placeholder]="(sewage.touched && sewage.invalid) ? 'Required' : 'Sewage'" aria-label="sewage"
+                aria-describedby="basic-addon1" [min]="0" [max]="100">
               <div class="input-group-append">
-                <span class="input-group-text">€</span>
+                <span class="input-group-text">%</span>
               </div>
               <div class="alert alert-danger" *ngIf="sewage.touched && sewage.invalid">
                 <div *ngIf="sewage.errors.required">Υποχρεωτικό πεδίο</div>
@@ -43,7 +46,7 @@
                 [placeholder]="(pool.touched && pool.invalid) ? 'Required' : 'pool'" aria-label="pool" aria-describedby="basic-addon4"
                 [min]="0" [max]="100">
               <div class="input-group-append">
-                <span class="input-group-text">€</span>
+                <span class="input-group-text">%</span>
               </div>
               <div class="alert alert-danger" *ngIf="pool.touched && pool.invalid">
                 <div *ngIf="pool.errors.required">Υποχρεωτικό πεδίο</div>
@@ -57,11 +60,11 @@
               <div class="input-group-prepend">
                 <span [ngClass]="{'error-required':garden.touched && garden.invalid}" class="input-group-text text-white bg-success" id="basic-addon5">ΚΗΠΟΣ</span>
               </div>
-              <input type="number" required [(ngModel)]="residence.garden" #garden="ngModel" garden="ngModel" name="garden" id="garden" class="form-control"
-                [placeholder]="(garden.touched && garden.invalid) ? 'Required' : 'garden'" aria-label="garden" aria-describedby="basic-addon5"
-                [min]="0" [max]="100">
+              <input type="number" required [(ngModel)]="residence.garden" #garden="ngModel" garden="ngModel" name="garden" id="garden"
+                class="form-control" [placeholder]="(garden.touched && garden.invalid) ? 'Required' : 'garden'" aria-label="garden"
+                aria-describedby="basic-addon5" [min]="0" [max]="100">
               <div class="input-group-append">
-                <span class="input-group-text">€</span>
+                <span class="input-group-text">%</span>
               </div>
               <div class="alert alert-danger" *ngIf="garden.touched && garden.invalid">
                 <div *ngIf="garden.errors.required">Υποχρεωτικό πεδίο</div>
@@ -79,7 +82,7 @@
                 [placeholder]="(water.touched && water.invalid) ? 'Required' : 'water'" aria-label="water" aria-describedby="basic-addon3"
                 [min]="0" [max]="100">
               <div class="input-group-append">
-                <span class="input-group-text">€</span>
+                <span class="input-group-text">%</span>
               </div>
               <div class="alert alert-danger" *ngIf="water.touched && water.invalid">
                 <div *ngIf="water.errors.required">Υποχρεωτικό πεδίο</div>
@@ -98,7 +101,7 @@
                 class="form-control" [placeholder]="(electric.touched && electric.invalid) ? 'Required' : 'electric'" aria-label="electric"
                 aria-describedby="basic-addon2" [min]="0" [max]="100">
               <div class="input-group-append">
-                <span class="input-group-text">€</span>
+                <span class="input-group-text">%</span>
               </div>
               <div class="alert alert-danger" *ngIf="electric.touched && electric.invalid">
                 <div *ngIf="electric.errors.required">Υποχρεωτικό πεδίο</div>

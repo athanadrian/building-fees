@@ -4,6 +4,10 @@ import { Residence } from '../../models/residence';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { ActivatedRoute } from '@angular/router';
+import { ResidentsService } from '../../services/residents.service';
+import { Resident } from '../../models/resident';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-residences',
@@ -12,19 +16,29 @@ import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 })
 export class ResidencesComponent implements OnDestroy {
 
-  residences: Residence[]=new Array<Residence>();
+  residences: Residence[] = new Array<Residence>();
   subscription: Subscription;
   tableResource: DataTableResource<Residence>;
-  items: Residence[]=[];
+  items: Residence[] = [];
   itemCount: number;
+  residentId: string;
+  resident: Resident;
+  residents$;
 
   constructor(
-    private residencesService: ResidencesService) {
+    private route: ActivatedRoute,
+    private residentsService: ResidentsService,
+    private residencesService: ResidencesService,
+    private userService: UserService) {
     this.subscription = this.residencesService.getAll().subscribe(residences => {
       this.residences = residences;
       console.log(residences);
       this.initializeTable(residences);
     });
+    this.subscription = this.userService.getAll().subscribe(appUsers => this.residents$ = appUsers);
+    this.residentId = this.route.snapshot.paramMap.get('resident');
+    console.log(this.residentId);
+    //if (this.residentId) this.residentsService.get(this.residentId).take(1).subscribe(resident => this.resident = resident);
   }
 
   private initializeTable(fees: Residence[]) {
@@ -47,7 +61,11 @@ export class ResidencesComponent implements OnDestroy {
       this.residences.filter(r => r.code === query) :
       this.residences;
 
-      this.initializeTable(filteredResidences);
+    this.initializeTable(filteredResidences);
+  }
+
+  warning() {
+    confirm('Στον κάτοικο έχει ήδη ανατεθεί ακίνητο!')
   }
 
   ngOnDestroy() {

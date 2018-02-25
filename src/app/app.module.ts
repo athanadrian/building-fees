@@ -13,11 +13,13 @@ import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 
 import { LoginComponent } from './login/login.component';
-
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
+
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { HouseFeesComponent } from './house-fees/house-fees.component';
+import { HouseFeesReportComponent } from './house-fees-report/house-fees-report.component';
 import { AllHouseFeesComponent } from './all-house-fees/all-house-fees.component';
+
 import { ProfileComponent } from './profile/profile.component';
 
 import { BuildingFeesComponent } from './admin/building-fees/building-fees.component';
@@ -43,14 +45,14 @@ import { FeesService } from './services/fees.service';
 import { LookupService } from './services/lookup.service';
 import { ResidencesService } from './services/residences.service';
 import { ResidentsService } from './services/residents.service';
-
+import { HouseFeesService } from './services/house-fees.service';
+import { FirebaseService } from './services/firebase.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
     HouseFeesComponent,
     BuildingFeesComponent,
     LoginComponent,
@@ -66,7 +68,9 @@ import { ResidentsService } from './services/residents.service';
     ResidenceFilterComponent,
     ResidentFilterComponent,
     ResidentCardComponent,
-    ResidentsFormComponent
+    ResidentsFormComponent,
+    MaintenanceComponent,
+    HouseFeesReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,11 +83,12 @@ import { ResidentsService } from './services/residents.service';
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HouseFeesComponent },
-      { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'house-fees/:year/:month', component: HouseFeesComponent },
+      { path: 'maintenance', component: MaintenanceComponent },
 
-      { path: 'house-fees', component: HouseFeesComponent, canActivate: [AuthGuard] },
+      { path: 'all-house-fees/:uid', component: AllHouseFeesComponent , canActivate: [AuthGuard] },
+      { path: 'house-fees-report/:feeId', component: HouseFeesReportComponent, canActivate: [AuthGuard] },
+      { path: 'house-fees-report/:year/:month', component: HouseFeesReportComponent, canActivate: [AuthGuard] },
       { path: 'profiles/:id', component: ProfileComponent, canActivate: [AuthGuard] },
      
       { path: 'admin/residents', component: ResidentsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
@@ -92,9 +97,9 @@ import { ResidentsService } from './services/residents.service';
       { path: 'admin/residences', component: ResidencesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences/new', component: ResidencesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/residences/:id', component: ResidencesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/building-fees', component: BuildingFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/building-fees/new', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/building-fees/:id', component: BuildingFeesFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/building-fees', component: BuildingFeesComponent, canActivate: [AuthGuard, AdminAuthGuard] }
     ])
   ],
   providers: [
@@ -105,6 +110,8 @@ import { ResidentsService } from './services/residents.service';
     FeesService,
     ResidencesService,
     ResidentsService,
+    HouseFeesService,
+    FirebaseService,
     LookupService
   ],
   bootstrap: [AppComponent]

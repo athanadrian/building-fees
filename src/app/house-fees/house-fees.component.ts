@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { Fee } from '../models/fee';
+import { AuthService } from '../services/auth.service';
+import { AppUser } from '../models/app-user';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-house-fees',
@@ -12,15 +15,23 @@ import { Fee } from '../models/fee';
 })
 export class HouseFeesComponent {
 
-  fees: Fee[] = [];
+  appUser:AppUser;
+  fees//: Fee[] = new Array<Fee>();
   filteredFees: Fee[] = [];
   year:string;
+  residenceId;
+  uid;
+ // showReport=true;
 
   constructor(
     private route: ActivatedRoute,
+    private auth:AuthService,
     private feesService: FeesService
   ) {
-    
+    this.auth.AppUser$.subscribe(appUser => {
+      this.appUser = appUser
+      console.log('uid', this.appUser) 
+    })
     this.feesService.getAll()
       .switchMap(fees => {
         this.fees = fees;

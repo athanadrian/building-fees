@@ -12,7 +12,7 @@
                 <div class="input-group-prepend">
                   <label [ngClass]="{'error-required':year.touched && year.invalid}" class="input-group-text text-white bg-info" for="year">ΕΤΟΣ</label>
                 </div>
-                <select class="custom-select" #year="ngModel" required [(ngModel)]="fee.year" name="year" id="year">
+                <select class="custom-select" #year="ngModel" [(ngModel)]="fee.year" name="year" id="year" required>
                   <option *ngFor="let year of years$ | async" [value]="year.$key">{{year.year}}</option>
                 </select>
               </div>
@@ -26,10 +26,7 @@
                   <label [ngClass]="{'error-required':month.touched && month.invalid}" class="input-group-text text-white bg-info" for="month">ΜΗΝΑΣ</label>
                 </div>
                 <select class="custom-select" #month="ngModel" [(ngModel)]="fee.month" name="month" id="month" id="month" required>
-                  <option selected>Επιλογή...</option>
-                  <option value="1">January</option>
-                  <option value="2">February</option>
-                  <option value="3">March</option>
+                    <option *ngFor="let month of months$ | async" [value]="month.$key">{{month.month}}</option>
                 </select>
               </div>
               <div class="alert alert-danger" *ngIf="month.touched && month.invalid">

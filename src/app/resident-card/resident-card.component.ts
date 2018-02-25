@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Resident } from '../models/resident';
+import { AppUser } from '../models/app-user';
 
 @Component({
   selector: 'resident-card',
@@ -8,7 +8,7 @@ import { Resident } from '../models/resident';
 })
 export class ResidentCardComponent {
 
-  @Input('resident') resident: Resident;
+  @Input('resident') resident: AppUser;
 
   constructor() { }
 

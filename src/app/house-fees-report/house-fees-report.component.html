@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col">
+    <div class="card" style="width: 45rem;">
+      <div class="card-body" *ngIf="houseFee">
+        <h5 class="card-header text-white bg-primary">Αναλυτική Κατάσταση Κοινοχρήστων {{houseFee.month}}/{{houseFee.year}}</h5>
+        <div>
+          <div class="form-group row">
+            <label for="sewage" class="col-sm-2 col-form-label">Βόθρος</label>
+            <div class="col-sm-4">
+              <input readonly type="text" [(ngModel)]="houseFee.sewage" name="sewage" class="form-control" id="sewage">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="pool" class="col-sm-2 col-form-label">Πισίνα</label>
+            <div class="col-sm-4">
+              <input readonly type="text" [(ngModel)]="houseFee.pool" name="pool" class="form-control" id="pool">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="garden" class="col-sm-2 col-form-label">Κήπος</label>
+            <div class="col-sm-4">
+              <input readonly type="text" [(ngModel)]="houseFee.garden" name="garden" class="form-control" id="garden">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="water" class="col-sm-2 col-form-label">ΕΥΔΑΠ</label>
+            <div class="col-sm-4">
+              <input readonly type="text" [(ngModel)]="houseFee.water" name="water" class="form-control" id="water">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="electric" class="col-sm-2 col-form-label">ΔΕΗ</label>
+            <div class="col-sm-4">
+              <input readonly type="text" [(ngModel)]="houseFee.electric" name="electric" class="form-control" id="electric">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="total" class="offset-sm-6 col-sm-2 col-form-label">ΣΥΝΟΛΟ</label>
+          <div class="col-sm-4">
+            <input readonly type="text"
+            [ngClass]="{
+              'paid':isPaid,
+              'unPaid':!isPaid
+            }"
+            [(ngModel)]="houseFee.total"
+            name="total" class="form-control" id="total">
+          </div>
+        </div>
+      </div>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>

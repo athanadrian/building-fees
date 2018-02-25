@@ -5,6 +5,7 @@ import 'rxjs/add/operator/take';
 
 import { Fee } from '../../models/fee';
 import { LookupService } from '../../services/lookup.service';
+import { Calculations } from '../../common/helpers/helpers';
 
 
 
@@ -16,6 +17,7 @@ import { LookupService } from '../../services/lookup.service';
 export class BuildingFeesFormComponent {
 
   years$;
+  months$;
   fee: Fee = new Fee();
   id: string;
 
@@ -26,12 +28,15 @@ export class BuildingFeesFormComponent {
     private feesService: FeesService) {
 
     this.years$ = this.lookupService.getYears();
+    this.months$ = this.lookupService.getMonths();
     this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id) this.feesService.get(this.id).take(1).subscribe(fee => this.fee = fee);
+    if (this.id) this.feesService.get(this.id).take(1).subscribe((fee:Fee) => this.fee = fee);
   }
 
-  save(fee) {
-    if (this.id) this.feesService.update(this.id, fee);
+  save(fee: Fee) {
+    fee.total = Calculations.calculateNewTotal(fee);
+    //fee.searchKey=this.fee.searchKey;
+    if (this.id) this.feesService.update(this.id, fee).then(() => console.log(fee));
     else this.feesService.create(fee);
 
     this.router.navigate(['/admin/building-fees']);

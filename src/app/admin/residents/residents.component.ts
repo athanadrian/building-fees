@@ -1,9 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ResidentsService } from '../../services/residents.service';
 import { Resident } from '../../models/resident';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ResidencesService } from '../../services/residences.service';
+import { AppUser } from '../../models/app-user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-residents',
@@ -12,22 +15,29 @@ import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 })
 export class ResidentsComponent implements OnDestroy {
 
-  residents: Resident[]=new Array<Resident>();
+  residents: AppUser[] = new Array<AppUser>();
   subscription: Subscription;
-  tableResource: DataTableResource<Resident>;
-  items: Resident[]=[];
+  tableResource: DataTableResource<AppUser>;
+  items: AppUser[] = [];
   itemCount: number;
+  residenceId: string;
 
   constructor(
-    private residentsService: ResidentsService) {
-    this.subscription = this.residentsService.getAll().subscribe(residents => {
+    private router: Router,
+    private route: ActivatedRoute,
+    private usersSevice: UserService,
+    private residencesService: ResidencesService) {
+    this.subscription = this.usersSevice.getAll().subscribe(residents => {
       this.residents = residents;
       console.log(residents);
       this.initializeTable(residents);
     });
+    this.residenceId = this.route.snapshot.paramMap.get('residence');
+    console.log(this.residenceId);
+    //if (this.residentId) this.usersSevice.get(this.residentId).take(1).subscribe(resident => this.resident = resident);
   }
 
-  private initializeTable(residents: Resident[]) {
+  private initializeTable(residents: AppUser[]) {
     this.tableResource = new DataTableResource(residents);
     this.tableResource.query({ offset: 0 })
       .then(items => this.items = items);
@@ -47,12 +57,32 @@ export class ResidentsComponent implements OnDestroy {
       this.residents.filter(r => r.lastname === query) :
       this.residents;
 
-      this.initializeTable(filteredResidents);
+    this.initializeTable(filteredResidents);
   }
 
+  notAvailable() {
+    confirm('Μη διαΘέσιμος!')
+  }
+
+  available() {
+    confirm('ΔιαΘέσιμος!')
+  }
+
+  addDelegation(uid, residenceId) {
+    if (!this.residenceId) confirm('Δεν έχεις επιλέξει οίκημα για ανάθεση! Επέλεξε οίκημα από διαχείριση κατοικιών.');
+    else {
+      this.usersSevice.connectUserToResidence(uid, this.residenceId);
+      this.router.navigate(['/admin/residences']);
+    }
+  }
+
+  removeDelegetion(uid, residenceId) {
+    this.usersSevice.disconnectUserFromResidence(uid, this.residenceId);
+    this.router.navigate(['/admin/residences']);
+  }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  
+
 }

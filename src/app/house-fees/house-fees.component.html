@@ -6,7 +6,7 @@
     <div class="row">
       <ng-container *ngFor="let fee of filteredFees; let i of index">
         <div class="col">
-         <fee-card [fee]="fee"></fee-card>
+         <fee-card [fee]="fee" [appUser]="appUser"></fee-card>
         </div>
         <div *ngIf="(i+1) % 2 === 0" class="w-100"></div>
       </ng-container>

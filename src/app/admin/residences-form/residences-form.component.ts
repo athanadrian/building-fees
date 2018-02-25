@@ -24,9 +24,12 @@ export class ResidencesFormComponent {
     if (this.id) this.residenceService.get(this.id).take(1).subscribe(residence => this.residence = residence);
   }
 
-  save(residence) {
+  save(residence: Residence) {
     if (this.id) this.residenceService.update(this.id, residence);
-    else this.residenceService.create(residence);
+    else {
+      residence.isAvailable = true;
+      this.residenceService.create(residence);
+    }
 
     this.router.navigate(['/admin/residences']);
   }

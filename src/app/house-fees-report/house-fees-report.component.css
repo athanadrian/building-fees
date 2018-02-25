@@ -1,0 +1,10 @@
+.card-header{
+    margin-bottom:30px; 
+}
+.paid{
+    background-color:green !important;
+}
+
+.unPaid{
+    background-color:red !important;
+}

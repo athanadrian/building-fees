@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem;">
   <div class="card-header text-white bg-primary">
-    Κάτοικος: {{resident.firstname +' '+resident.lastname}}
+    Κάτοικος: {{resident.name}}
   </div>
   <div class="card-body">
     <h5 class="card-title">Πληροφορίες</h5>
@@ -10,7 +10,7 @@
     <p class="card-text">Email:
       <span class="text-right font-weight-bold">{{resident.email}}</span>
     </p>
-    <p class="card-text">Ιδιοκτήτης:
+    <p class="card-text" *ngIf="resident.isOwner">Ιδιοκτήτης:
       <span class="text-right font-weight-bold">{{resident.isOwner ? 'Ιδιοκτήτης' : 'Ενοικιαστής'}}</span>
     </p>
   </div>

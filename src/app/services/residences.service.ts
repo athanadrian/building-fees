@@ -3,6 +3,7 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable }
 
 import * as firebase from 'firebase';
 import { Residence } from '../models/residence';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ResidencesService {
@@ -19,6 +20,17 @@ export class ResidencesService {
     return this.db.object('/residences/' + residenceId);
   }
 
+  findResidence(residenceId: string): Observable<Residence> {
+    const residence = this.db.list(`/residences/`, {
+      query: {
+        orderByKey: true,
+        equalTo: residenceId
+      }
+    })
+      .map(results => results[0])
+    return residence;
+  }
+
   create(residence) {
     return this.db.list('/residences').push(residence);
   }
@@ -29,6 +41,13 @@ export class ResidencesService {
 
   delete(residenceId) {
     return this.db.object('/residences/' + residenceId).remove();
+  }
+
+  makeResidenceUnavailable(residenceId){
+    return this.db.object('/residences/' + residenceId).update({isAvailable:false});
+  }
+  makeResidenceAvailable(residenceId){
+    return this.db.object('/residences/' + residenceId).update({isAvailable:true});
   }
 
 }

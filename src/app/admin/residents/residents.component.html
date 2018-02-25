@@ -1,28 +1,90 @@
 <p>
-    <a class="btn btn-primary" routerLink="/admin/residents/new">Προσθήκη Κατοίκου</a>
-  </p>
-  <p>
-    <input type="text" class="form-control" #query (keyup)="filter(query.value)" placeholder="Αναζήτηση.....">
-  </p>
-  <data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
-    <!-- <data-table-column [property]="'code'" [header]="'Κωδικός'" [sortable]="true" [resizable]="true"></data-table-column>
+  <a class="btn btn-primary" routerLink="/admin/residents/new">
+    <span class="fa fa-plus"></span> Προσθήκη Κατοίκου</a>
+</p>
+<p>
+  <input type="text" class="form-control" #query (keyup)="filter(query.value)" placeholder="Αναζήτηση.....">
+</p>
+<data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+  <!-- <data-table-column [property]="'code'" [header]="'Κωδικός'" [sortable]="true" [resizable]="true"></data-table-column>
    -->
-    <data-table-column [property]="'firstname'" [header]="'Όνομα'" [sortable]="true" [resizable]="true">
-      <ng-template #dataTableCell let-item="item">
-        {{item.fistname }}
-      </ng-template>
-    </data-table-column>
-    <data-table-column [property]="'lastname'" [header]="'Επώνυμο'" [sortable]="true" [resizable]="true">
-        <ng-template #dataTableCell let-item="item">
-          {{item.lastname }}
-        </ng-template>
-      </data-table-column>
-    <data-table-column [property]="'$key'">
-      <ng-template #dataTableHeader let-item="item">
-        <i>Actions</i>
-      </ng-template>
-      <ng-template #dataTableCell let-item="item">
-        <a [routerLink]="['/admin/residents/', item.$key]">Επεξεργασία</a>
-      </ng-template>
-    </data-table-column>
-  </data-table>
+  <data-table-column [property]="'email'" [header]="'Email'" [sortable]="true" [resizable]="true">
+    <ng-template #dataTableCell let-item="item">
+      {{item.email }}
+    </ng-template>
+  </data-table-column>
+  <data-table-column [property]="'name'" [header]="'Όνομα'" [sortable]="true" [resizable]="true" [visible]="false">
+    <ng-template #dataTableCell let-item="item">
+      {{item.name }}
+    </ng-template>
+  </data-table-column>
+  <data-table-column [property]="'firstname'" [header]="'Όνομα'" [sortable]="true" [resizable]="true" [visible]="false">
+    <ng-template #dataTableCell let-item="item">
+      {{item.firstname }}
+    </ng-template>
+  </data-table-column>
+  <data-table-column [property]="'lastname'" [header]="'Επώνυμο'" [sortable]="true" [resizable]="true" [visible]="false">
+    <ng-template #dataTableCell let-item="item">
+      {{item.lastname }}
+    </ng-template>
+  </data-table-column>
+  <data-table-column [property]="'phone'" [header]="'Phone'" [sortable]="true" [resizable]="true" [visible]="false">
+    <ng-template #dataTableCell let-item="item">
+      {{item.phone }}
+    </ng-template>
+  </data-table-column>
+  <data-table-column *ngIf="!residenceId" [property]="'$key'" [header]="'Ενέργειες'">
+    <ng-template #dataTableHeader let-item="item">
+      <tr>
+        <th colspan="3">Ενέργειες</th>
+      </tr>
+    </ng-template>
+    <ng-template #dataTableCell let-item="item">
+      <td>
+        <a [routerLink]="['/admin/residents/', item.$key]">
+          <span class="fa fa-edit text-success"></span>
+        </a>
+      </td>
+      <td>
+        <a [routerLink]="['/admin/residents/', {delete:item.$key}]">
+          <span class="fa fa-trash text-danger"></span>
+        </a>
+      </td>
+      <td>
+        <a [routerLink]="['/admin/residents/', {info:item.$key}]">
+          <span class="fa fa-info-circle text-primary"></span>
+        </a>
+      </td>
+    </ng-template>
+  </data-table-column>
+  <data-table-column [property]="'$key'" [header]="'Διάθεση'">
+    <ng-template #dataTableHeader let-item="item">
+      Διαθέσιμος
+    </ng-template>
+    <ng-template #dataTableCell let-item="item">
+      <!-- <a [routerLink]="['/admin/residences/', {resident:item.$key}]" *ngIf="!item.isResident">
+        <span class="fa fa-check text-success"></span>
+      </a> -->
+      <div *ngIf="!item.isResident">
+          <span class="fa fa-check text-success" (click)="available()"></span>
+        </div>
+      <div *ngIf="item.isResident">
+        <span class="fa fa-exclamation-triangle text-warning" (click)="notAvailable()"></span>
+      </div>
+    </ng-template>
+  </data-table-column>
+ 
+  <data-table-column [property]="'$key'" [header]="'Ανάθεση'">
+    <ng-template #dataTableHeader let-item="item">
+      Ανάθεση
+    </ng-template>
+    <ng-template #dataTableCell let-item="item">
+      <button class="btn btn-link" (click)="removeDelegetion(item.$key, residenceId)" *ngIf="item.isResident">
+        <span class="fa fa-minus text-danger"></span>
+      </button>
+      <button class="btn btn-link" (click)="addDelegation(item.$key, residenceId )" *ngIf="!item.isResident">
+        <span class="fa fa-plus text-info"></span>
+      </button>
+    </ng-template>
+  </data-table-column>
+</data-table>

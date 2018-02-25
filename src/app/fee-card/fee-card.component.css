@@ -1,0 +1,10 @@
+.total{
+    padding-right: 10px !important;
+    font-weight:bold !important; 
+}
+.card{
+    margin-bottom: 30px;
+}
+.card-footer{
+    padding:0;
+}
